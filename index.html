@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Login and Menu</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background-color: #800000;
+            color: white;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        .login-container, .dashboard {
+            background-color: rgba(204, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            width: 300px;
+        }
+        .dashboard {
+            display: none;
+        }
+        .login-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .login-header img {
+            width: 60px;
+            height: 60px;
+        }
+        h2 {
+            margin-top: 10px;
+        }
+        .login-form {
+            display: flex;
+            flex-direction: column;
+        }
+        input {
+            margin: 10px 0;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #ff3333;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #ff6666;
+        }
+        #loginMessage {
+            margin-top: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .success {
+            color: #4CAF50;
+        }
+        .error {
+            color: #f44336;
+        }
+        #gunIcon {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #ff3333;
+            border-radius: 50%;
+            cursor: move;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+        }
+        #menu {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            background-color: rgba(204, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            display: none;
+        }
+        .menu-item {
+            margin-bottom: 10px;
+        }
+        .toggle {
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+            position: relative;
+            background-color: #ccc;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+        .toggle-input {
+            display: none;
+        }
+        .toggle-slider {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 50%;
+            transition: 0.4s;
+        }
+        .toggle-input:checked + .toggle-slider {
+            transform: translateX(26px);
+            background-color: #4CAF50;
+        }
+        .toggle-status {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="loginContainer" class="login-container">
+            <div class="login-header">
+                <img src="https://wallpapercave.com/wp/wp7892722.jpg" alt="Game Logo">
+                <h2>777 pannel </h2>
+            </div>
+            <form id="loginForm" class="login-form">
+                <input type="text" id="userId" placeholder="User ID" required aria-label="User ID">
+                <input type="password" id="password" placeholder="Password" required aria-label="Password">
+                <button type="submit">Login</button>
+            </form>
+            <div id="loginMessage"></div>
+        </div>
+        <div id="dashboard" class="dashboard">
+            <h2>Welcome to the Pannel </h2>
+            <p>kill the FF server Enjoy pannel .</p>
+        </div>
+    </div>
+
+    <div id="gunIcon" style="display: none;">🔫</div>
+    <img src="https://wallpapercave.com/wp/wp7892722.jpg" alt="Game Logo">
+    <div id="menu">
+        <div class="menu-item">
+            <span>ONLY BODY </span>
+            <label class="toggle">
+                <input type="checkbox" class="toggle-input" onchange="toggleFeature(this, 'code')">
+                <span class="toggle-slider"></span>
+            </label>
+            <span id="codeStatus" class="toggle-status">Not Activated</span>
+        </div>
+        <div class="menu-item">
+            <span>ENEMY DIRECTION</span>
+            <label class="toggle">
+                <input type="checkbox" class="toggle-input" onchange="toggleFeature(this, 'contact')">
+                <span class="toggle-slider"></span>
+            </label>
+            <span id="contactStatus" class="toggle-status">Not Activated</span>
+        </div>
+        <div class="menu-item">
+            <span>ONE TAP </span>
+            <label class="toggle">
+                <input type="checkbox" class="toggle-input" onchange="toggleFeature(this, 'login')">
+                <span class="toggle-slider"></span>
+            </label>
+            <span id="loginStatus" class="toggle-status">Not Activated</span>
+        </div>
+
+
+        
+            <span>SPEED HACK  </span>
+            <label class="toggle">
+                <input type="checkbox" class="toggle-input" onchange="toggleFeature(this, 'login')">
+                <span class="toggle-slider"></span>
+            </label>
+            <span id="loginStatus" class="toggle-status">Not Activated</span>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const userId = document.getElementById('userId').value;
+            const password = document.getElementById('password').value;
+            const messageElement = document.getElementById('loginMessage');
+
+            if (userId === '777' && password === 'AS9777') {
+                document.getElementById('loginContainer').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+                document.getElementById('gunIcon').style.display = 'flex';
+            } else {
+                messageElement.textContent = 'Invalid credentials. Please try again.';
+                messageElement.className = 'error';
+            }
+        });
+
+        const gunIcon = document.getElementById('gunIcon');
+        const menu = document.getElementById('menu');
+        let isDragging = false;
+        let currentX;
+        let currentY;
+        let initialX;
+        let initialY;
+        let xOffset = 0;
+        let yOffset = 0;
+
+        gunIcon.addEventListener('mousedown', dragStart);
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', dragEnd);
+        gunIcon.addEventListener('click', toggleMenu);
+
+        function dragStart(e) {
+            initialX = e.clientX - xOffset;
+            initialY = e.clientY - yOffset;
+            isDragging = true;
+        }
+
+        function drag(e) {
+            if (isDragging) {
+                e.preventDefault();
+                currentX = e.clientX - initialX;
+                currentY = e.clientY - initialY;
+                xOffset = currentX;
+                yOffset = currentY;
+                setTranslate(currentX, currentY, gunIcon);
+            }
+        }
+
+        function dragEnd(e) {
+            initialX = currentX;
+            initialY = currentY;
+            isDragging = false;
+        }
+
+        function setTranslate(xPos, yPos, el) {
+            el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
+        }
+
+        function toggleMenu() {
+            menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function toggleFeature(checkbox, feature) {
+            const status = document.getElementById(`${feature}Status`);
+            status.textContent = checkbox.checked ? 'Activated' : 'Not Activated';
+        }
+    </script>
+</body>
+</html>
